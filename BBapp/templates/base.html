@@ -1,0 +1,48 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Sweet Home{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'BBapp/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body class="site-body">
+<!-- contact popup msg -->
+    {% if messages %}
+<div class="toast-container">
+    {% for message in messages %}
+        <div class="toast {{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+
+<nav class="navbar">
+    <div class="nav-left">
+        <img src="{% static 'images/mdlogo.jpg' %}" class="logo-img">
+        
+    <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'property_list' %}">Rent Stay</a></li>
+        </ul>
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <ul class="nav-links-right-top">
+        <li><a class="book-btn" href="{% url 'book_property' %}">Book Now</a></li>
+        <li><a class="book-btn" href="{% url 'login' %}">CheckIn</a></li>
+        <li><a href="{% url 'location' %}"> 📍Location</a></li>
+        <li><a class="contact-container" href="{% url 'contact' %}"> 👤Contact Us</a></li>
+    </ul>
+
+</nav>
+{% block content %}{% endblock %}
+</body>
+
+</html>

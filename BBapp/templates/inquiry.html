@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Property Requirement</h2><br>
+
+<form method="post" >
+    {% csrf_token %}
+
+    
+    <select name="property_type" required>
+        <option>Select Property Type</option>
+        <option>PG</option>
+        <option>1 BHK</option>
+        <option>2 BHK</option>
+        <option>3 BHK</option>
+    </select>
+    <br><br>
+
+    
+    <select name="location" required>
+        <option>Select Location</option>
+        <option>Hyderabad</option>
+        <option>Bangalore</option>
+        <option>Chennai</option>
+        <option>Pune</option>
+    </select>
+    <br><br>
+
+    
+    <select name="budget" required>
+        <option>Select Budget</option>
+        <option>₹5,000 – ₹10,000</option>
+        <option>₹10,000 – ₹15,000</option>
+        <option>₹15,000 – ₹20,000</option>
+        <option>₹20,000+</option>
+    </select>
+    <br><br>
+
+    
+    <input type="tel" name="phone" placeholder="Phone" required>
+    <br><br>
+
+    
+    <input type="email" name="email" placeholder="Email" required>
+    <br><br>
+
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}

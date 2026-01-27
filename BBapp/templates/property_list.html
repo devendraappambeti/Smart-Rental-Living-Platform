@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h1 style="color:white; text-align:center;">Explore Our Premium Spaces</h1>
+
+<div class="property-container">
+
+{% for property in properties %}
+    <div class="property-card">
+
+        {% if property.image %}
+            <img src="{{ property.image.url }}">
+        {% endif %}
+
+        <div class="property-content">
+            <div class="property-title">{{ property.title }}</div>
+            <div class="property-location">{{ property.location }}</div>
+            <div class="property-price">₹{{ property.price }} / month</div>
+
+            <a href="{% url 'contact_owner' property.id %}" class="book-btn">
+                Book Now
+            </a>
+        </div>
+
+    </div>
+{% endfor %}
+
+</div>
+
+{% endblock %}

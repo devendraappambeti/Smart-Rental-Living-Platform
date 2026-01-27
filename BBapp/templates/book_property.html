@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Book Property{% endblock %}
+
+{% block content %}
+<div class="booking-wrapper">
+
+    <h1 class="booking-title">Book Your Stay</h1>
+    <p class="booking-subtitle">Choose a Sweet Home</p>
+
+    {% if booking_done %}
+        <h1 class="success-msg">✅ Thank You!</h1>
+        <p>Your booking has been confirmed successfully.</p>
+
+        <script>
+            setTimeout(function () {
+                window.location.href = "{% url 'home' %}";
+            }, 5000);
+        </script>
+
+    {% else %}
+        <form method="post" action="{% url 'book_property' %}" class="booking-form">
+            {% csrf_token %}
+
+            <div class="field">
+                <label>🏛️Property Type</label>
+                <select name="property_type">
+                    <option>All</option>
+                    <option>1RK</option>
+                    <option>1BHK</option>
+                    <option>2BHK</option>
+                    <option>PG</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>📆Check-in Date</label>
+                <input type="date" name="checkin_date" required>
+            </div>
+
+            <div class="field">
+                <label>🕒Check-in Time</label>
+                <input type="time" name="checkin_time">
+            </div>
+
+            <div class="field">
+                <label>🏛️Rooms </label>
+                <input type="number" name="rooms" min="1">
+            </div>
+
+            <div class="field">
+                <label> 👤Guests</label>
+                <input type="number" name="guests" min="1">
+            </div>
+
+            <button type="submit" class="book-now-btn">
+                Confirm Booking
+            </button>
+        </form>
+    {% endif %}
+</div>
+{% endblock %}

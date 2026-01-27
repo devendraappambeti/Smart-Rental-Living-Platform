@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Location{% endblock %}
+
+{% block content %}
+
+<div class="location-details">
+    <h1>Search for Sweet Home Properties!</h1>
+
+    <form method="get" action="{% url 'property_list' %}" class="search-box">
+
+        <!-- Search input -->
+        <input type="text"
+               name="location"
+               placeholder="Search nearby Sweet Home property by city or state"
+               class="full-input">
+
+        <!-- State row -->
+    <div class="two-field-row">
+        <div class="field-row">
+            <label>State:</label>
+            <select name="state">
+                <option value="All">All</option>
+                <option>Andhra Pradesh</option>
+                <option>Tamilnadu</option>
+                <option>Telangana</option>
+                <option>Karnataka</option>
+                <option>Maharastra</option>
+            </select>
+        </div>
+
+        <!-- City row -->
+        <div class="field-row">
+            <label>City:</label>
+            <select name="city">
+                <option value="All">All</option>
+                <option>Bengaluru</option>
+                <option>Hyderabad</option>
+                <option>Chennai</option>
+            </select>
+        </div>
+
+        <!-- Buttons -->
+        <div class="btn-row">
+            <button type="submit" class="search-btn">Search</button>
+            <button type="reset" class="reset-btn">Reset</button>
+
+        </div>
+
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,94 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login / Signup</title>
+    <link rel="stylesheet" href="{% static 'BBapp/style.css' %}">
+</head>
+<body>
+
+<div class="login-wrapper">
+<div class="login-container">
+
+    <!-- TABS -->
+    <div class="login-tabs">
+        <span id="signupTab" class="active" onclick="showSignup()">SIGNUP</span>
+        <span class="divider">|</span>
+        <span id="loginTab" onclick="showLogin()">LOGIN</span>
+    </div>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <!-- SIGNUP FORM -->
+        <div id="signupForm">
+
+            <div class="box-field">
+                <label>Full Name</label>
+                <input type="text" name="name">
+            </div>
+
+            <div class="box-field">
+                <label>Mobile Number</label>
+                <input type="tel" name="phone">
+            </div>
+
+            <div class="box-field">
+                <label>Email ID</label>
+                <input type="email" name="email">
+            </div>
+
+            <div class="box-field">
+                <label>New Password</label>
+                <input type="password" name="password">
+            </div>
+
+            <div class="box-field">
+                <label>Confirm Password</label>
+                <input type="password" name="confirm_password">
+            </div>
+
+            <button type="submit" class="create-btn">Create Account</button>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <div id="loginForm" style="display:none;">
+
+            <div class="loginbox-field">
+                <label>Username or Email address</label>
+                <input type="email" name="login_email">
+            </div>
+
+            <div class="loginbox-field password-field">
+                <label>Password</label>
+                <input type="password" name="login_password">
+                <span class="forgot-link">Forgot Password?</span>
+            </div>
+
+            <button type="submit" class="continue-btn">Continue</button>
+        </div>
+
+    </form>
+
+</div>
+</div>
+
+<script>
+function showSignup() {
+    signupForm.style.display = "block";
+    loginForm.style.display = "none";
+    signupTab.classList.add("active");
+    loginTab.classList.remove("active");
+}
+
+function showLogin() {
+    loginForm.style.display = "block";
+    signupForm.style.display = "none";
+    loginTab.classList.add("active");
+    signupTab.classList.remove("active");
+}
+</script>
+
+</body>
+</html>

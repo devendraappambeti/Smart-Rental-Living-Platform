@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% block title %}Sweet Home{% endblock %}
+
+{% block content %}
+<section id="BookNow" class="info-section">
+    <h3>
+        <a href="{% url 'book_property' %}">BookNow</a>
+    </h3>
+</section>
+
+<section id="CheckIn" class="info-section">
+    <h3>
+        <a href="{% url 'login' %}">CheckIn</a>
+    </h3>
+</section>
+
+<section id="location" class="info-section">
+    <h2>
+        <a href="{% url 'location' %}">Locations</a>
+    </h2>
+</section>
+
+
+<section id="ContactUs" class="info-section">
+    <h1> Contact Us </h1><br>
+   <p>Phone no.📞: +91 9848862269</p><br>
+   <p>Email ✉️:madhunimmala2004@gmail.com</p><br>
+    <p>For more information, please contact us 😍😍 </p>
+</section>
+</div>
+
+
+<section class="home-section">
+    <div class="home-section-content">
+        <h1>
+            6-Star Life In <br>
+            <span>Bengaluru</span>
+        </h1>
+
+        <form method="get" action="{% url 'property_list' %}" class="hero-search">
+            <input
+                type="text"
+                name="location"
+                placeholder="Enter Preferred Location e.g. Bengaluru, Hyderabad">
+            <button type="submit">➡️</button>
+        </form>
+    </div>
+</section>
+
+<!-- 6 STAR SECTION -->
+<section class="six-star-section">
+    <h2>What makes Sweet Home <span>6-Star?</span></h2>
+
+    <p class="subtitle">
+        Premium Furniture • Secure Living • Everyday Home Services • Laundry Convenience • Wholesome Meals • Seamless Internet
+    </p>
+
+    <div class="six-star-grid">
+        <div class="six-card">
+            <h3>#Luxury</h3>
+            <i class="icon">🛋️</i>
+            <p>
+                A thoughtfully designed luxury home featuring elegant interiors, premium furnishings, and refined finishes—crafted for comfort, style, and elevated everyday living.
+            </p>
+        </div>
+
+        <div class="six-card">
+            <h3>#Safety</h3>
+            <i class="icon">🛡️</i>
+            <p>
+                24/7 secure access designed to keep your home safe, calm, and private.
+            </p>
+        </div>
+
+        <div class="six-card">
+            <h3>#Service</h3>
+            <i class="icon">✨</i>
+            <p>
+                Regular housekeeping and support services that make everyday living easy, comfortable, and worry-free.
+            </p>
+        </div>
+
+        <div class="six-card">
+            <h3>#Smart Living</h3>
+            <i class="icon">📱</i>
+            <p>
+                Designed for modern living with intelligent systems that make your home more comfortable, efficient, and effortless.
+            </p>
+        </div>
+
+        <div class="six-card">
+            <h3>#Social</h3>
+            <i class="icon">🎉</i>
+            <p>
+                Community events, shared spaces & vibrant city life.
+            </p>
+        </div>
+
+        <div class="six-card">
+            <h3>#Savings</h3>
+            <i class="icon">💰</i>
+            <p>
+                Transparent pricing with no hidden costs.
+            </p>
+        </div>
+    </div>
+</section>
+<footer class="site-footer">
+    <div class="footer-left">
+        <i class="fas fa-phone"></i>
+        <span>9848862269</span>
+    </div>
+
+    <div class="footer-center">
+        <a href="#"><i class="fab fa-instagram📸"></i></a>
+        <a href="#"><i class="fab fa-telegram"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+    </div>
+
+    <div class="footer-right">
+        ©️ Sweet Home 2026
+    </div>
+    <button id="scrollTopBtn" title="Go to top">
+    <i class="fas fa-arrow-up"></i>
+</button>
+</footer>
+
+{% endblock %}

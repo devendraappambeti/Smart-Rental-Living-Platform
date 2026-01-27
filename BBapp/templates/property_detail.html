@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h2>{{property.title}}</h2><br>
+<img src="{{property.image.url}}" width=1000><br>
+<p>location={{property.location}}</p><br>
+<p>description={{property.description}}</p><br>
+<p>price=${{property.price}}</p><br>
+
+<a href="{% url 'contact_owner' property.id %}">
+    Contact Owner
+</a>
+
+
+{% endblock %}
