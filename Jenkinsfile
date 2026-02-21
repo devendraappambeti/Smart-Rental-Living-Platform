@@ -2,39 +2,55 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "yourdockerhubusername/smart-rental"
+        DOCKER_IMAGE = "devendra166/smart-rental"
+        DOCKER_TAG = "latest"
     }
 
     stages {
 
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/devendraappambeti/Smart-Rental-Living-Platform.git'
+                checkout scm
+            }
         }
 
         stage('Build Docker Image') {
             steps {
-                script {
-                    docker.build("${DOCKER_IMAGE}:latest")
+                bat "docker build -t %DOCKER_IMAGE%:%DOCKER_TAG% ."
+            }
+        }
+
+        stage('Login to DockerHub') {
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub-credentials',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+                    bat "docker login -u %DOCKER_USER% -p %DOCKER_PASS%"
                 }
             }
         }
 
-        stage('Push to DockerHub') {
+        stage('Push Image to DockerHub') {
             steps {
-                script {
-                    docker.withRegistry('', 'dockerhub-cred') {
-                        docker.image("${DOCKER_IMAGE}:latest").push()
-                    }
-                }
+                bat "docker push %DOCKER_IMAGE%:%DOCKER_TAG%"
             }
         }
 
         stage('Deploy to Kubernetes') {
             steps {
-                sh 'kubectl apply -f k8s/deployment.yaml'
-                sh 'kubectl apply -f k8s/service.yaml'
+                bat "kubectl apply -f k8s/"
             }
+        }
+    }
+
+    post {
+        success {
+            echo 'Deployment Successful 🚀'
+        }
+        failure {
+            echo 'Pipeline Failed ❌'
         }
     }
 }
