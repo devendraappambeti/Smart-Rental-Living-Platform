@@ -2,8 +2,9 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "devendra166/smart-rental"
-        DOCKER_TAG = "latest"
+        IMAGE_NAME = "smart-rental"
+        IMAGE_TAG = "latest"
+        CONTAINER_NAME = "smart-rental-container"
     }
 
     stages {
@@ -16,29 +17,27 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat "docker build -t %DOCKER_IMAGE%:%DOCKER_TAG% ."
+                bat "docker build -t %IMAGE_NAME%:%IMAGE_TAG% ."
             }
         }
 
-       
-        }
-
-        stage('Push Image to DockerHub') {
+        stage('Stop Old Container (if running)') {
             steps {
-                bat "docker push %DOCKER_IMAGE%:%DOCKER_TAG%"
+                bat "docker stop %CONTAINER_NAME% || exit 0"
+                bat "docker rm %CONTAINER_NAME% || exit 0"
             }
         }
 
-        stage('Deploy to Kubernetes') {
+        stage('Run Docker Container') {
             steps {
-                bat "kubectl apply -f k8s/"
+                bat "docker run -d -p 8000:8000 --name %CONTAINER_NAME% %IMAGE_NAME%:%IMAGE_TAG%"
             }
         }
     }
 
     post {
         success {
-            echo 'Deployment Successful 🚀'
+            echo 'Docker Build & Deployment Successful 🚀'
         }
         failure {
             echo 'Pipeline Failed ❌'
