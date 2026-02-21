@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smart-rental-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: smart-rental
+  template:
+    metadata:
+      labels:
+        app: smart-rental
+    spec:
+      containers:
+      - name: smart-rental
+        image: devendra166/smart-rental:latest
+        ports:
+        - containerPort: 8000
