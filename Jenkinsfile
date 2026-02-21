@@ -20,16 +20,7 @@ pipeline {
             }
         }
 
-        stage('Login to DockerHub') {
-            steps {
-                withCredentials([usernamePassword(
-                    credentialsId: 'dockerhub-credentials',
-                    usernameVariable: 'DOCKER_USER',
-                    passwordVariable: 'DOCKER_PASS'
-                )]) {
-                    bat "docker login -u %DOCKER_USER% -p %DOCKER_PASS%"
-                }
-            }
+       
         }
 
         stage('Push Image to DockerHub') {
